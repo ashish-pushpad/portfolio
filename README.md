@@ -1,16 +1,67 @@
-# React + Vite
+# Setup Guide
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## Requirements
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+* Node.js **18+**
+* npm (comes with Node.js)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Installation
 
-## Expanding the ESLint configuration
+```bash
+git clone <repository-url>
+cd <project-directory>
+npm install
+```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+VITE_API_URL=
+```
+
+> No backend or API is required to run this project.
+
+---
+
+## Development
+
+Start the local development server:
+
+```bash
+npm run dev
+```
+
+---
+
+## Production Build
+
+Build the project:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+---
+
+## Notes
+
+* Built with **Vite**
+* Always run `npm install` after cloning
+* Update content inside `src/data/`
+* Store images, GIFs, and assets in `src/assets/`
+
+---
