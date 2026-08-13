@@ -1,0 +1,104 @@
+.journey__inner {
+  padding-top: var(--section-py);
+}
+
+.journey__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  gap: 2rem;
+}
+
+.journey__visual {
+  flex-shrink: 0;
+}
+
+.journey__svg {
+  width: clamp(100px, 16vw, 180px);
+  height: auto;
+  color: var(--text);
+  opacity: 0.75;
+}
+
+/* Timeline list */
+.journey__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.journey__entry {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 2rem;
+  padding: clamp(2rem, 4vw, 2.5rem) 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+  position: relative;
+}
+
+/* Connecting dot */
+.journey__entry::before {
+  content: '';
+  position: absolute;
+  left: calc(5rem + 2rem - 4px);  /* align with content start - half dot */
+  top: calc(clamp(2rem, 4vw, 2.5rem) + 0.6rem);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: none; /* dots shown on desktop only */
+}
+
+.journey__year {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  font-weight: 700;
+  color: var(--text-muted);
+  padding-top: 0.2rem;
+}
+
+.journey__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.journey__title {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: var(--text);
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+.journey__desc {
+  max-width: 50ch;
+}
+
+/* Hover accent on year */
+.journey__entry:hover .journey__year {
+  color: var(--accent);
+  transition: color 0.2s var(--ease);
+}
+
+/* ─── RESPONSIVE ─────────────────────── */
+@media (max-width: 768px) {
+  .journey__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .journey__visual {
+    align-self: flex-end;
+  }
+
+  .journey__entry {
+    grid-template-columns: 4rem 1fr;
+    gap: 1rem;
+  }
+
+  .journey__desc { max-width: 100%; }
+}

@@ -1,0 +1,52 @@
+.final {
+  background: var(--bg-secondary);
+}
+
+.final__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: clamp(2rem, 6vw, 6rem);
+  padding-top: var(--section-py);
+}
+
+.final__words {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.final__line {
+  display: block;
+  line-height: 0.95;
+  color: var(--text);
+}
+
+.final__line--accent {
+  color: var(--accent);
+}
+
+.final__sub {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 0.5rem;
+  max-width: 32ch;
+}
+
+.final__btn {
+  align-self: flex-start;
+  margin-top: 0.5rem;
+}
+
+/* ─── RESPONSIVE ─────────────────────── */
+@media (max-width: 900px) {
+  .final__inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .final__sub {
+    max-width: 100%;
+  }
+}

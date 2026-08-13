@@ -1,0 +1,47 @@
+/* ─── DESIGN TOKENS ─────────────────────────────────────────────────────────── */
+
+:root {
+  /* Light theme (default) */
+  --bg:           #F7F7F5;
+  --bg-secondary: #EFEFED;
+  --text:         #111111;
+  --text-muted:   #555555;
+  --accent:       #D90000;
+  --accent-hover: #AA0000;
+  --border:       #D8D8D4;
+
+  /* Typography */
+  --font-mono: 'IBM Plex Mono', 'Courier New', monospace;
+
+  /* Spacing scale */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  6rem;
+  --space-2xl: 10rem;
+
+  /* Section vertical padding */
+  --section-py: clamp(5rem, 12vw, 10rem);
+
+  /* Max content width */
+  --max-w: 1200px;
+  --content-px: clamp(1.5rem, 5vw, 5rem);
+
+  /* Nav height */
+  --nav-h: 4rem;
+
+  /* Transition */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur: 0.3s;
+}
+
+[data-theme="dark"] {
+  --bg:           #111111;
+  --bg-secondary: #1A1A1A;
+  --text:         #F5F5F2;
+  --text-muted:   #B5B5B0;
+  --accent:       #FF3030;
+  --accent-hover: #CC0000;
+  --border:       #2A2A2A;
+}
