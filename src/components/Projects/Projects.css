@@ -74,13 +74,16 @@
   border: 1px solid var(--border);
   background: var(--bg-secondary);
   min-height: 240px;
+  width: min(100%, 380px);
+  margin-inline: auto;
+  overflow: hidden;
 }
 
 .project-item__svg {
-  width: 100%;
-  max-width: 200px;
+  width: min(100%, 270px);
   height: auto;
   color: var(--text);
+  display: block;
 }
 
 /* ─── RESPONSIVE ─────────────────────────────── */
@@ -94,16 +97,21 @@
   }
 
   .project-item__diagram {
-    min-height: 180px;
-    max-width: 300px;
+    min-height: 190px;
+    width: min(100%, 320px);
   }
 
   .project-item__svg {
-    max-width: 150px;
+    width: min(100%, 220px);
   }
 }
 
 @media (max-width: 480px) {
+  .project-item__diagram {
+    width: 100%;
+    min-height: 170px;
+  }
+
   .project-item__links {
     flex-direction: column;
     align-items: flex-start;

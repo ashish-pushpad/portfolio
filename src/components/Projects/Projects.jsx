@@ -1,14 +1,10 @@
 import { useScrollAnimation } from '../../hooks/useScrollAnimation'
 import { projects } from '../../data/projects'
 import DiagramMicroservices from '../../assets/illustrations/DiagramMicroservices'
-import DiagramGateway from '../../assets/illustrations/DiagramGateway'
-import DiagramPipeline from '../../assets/illustrations/DiagramPipeline'
 import './Projects.css'
 
 const diagrams = {
   microservices: DiagramMicroservices,
-  gateway: DiagramGateway,
-  pipeline: DiagramPipeline,
 }
 
 export default function Projects() {

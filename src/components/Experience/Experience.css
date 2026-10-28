@@ -1,0 +1,73 @@
+﻿.experience__header {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+.experience__heading {
+  color: var(--text);
+}
+
+.experience__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.experience__item {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  padding: clamp(2rem, 4vw, 3rem) 0;
+  border-bottom: 1px solid var(--border);
+  align-items: start;
+}
+
+.experience__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.experience__role {
+  color: var(--text);
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.experience__company {
+  color: var(--accent);
+  letter-spacing: 0.04em;
+}
+
+.experience__duration {
+  color: var(--text-muted);
+}
+
+.experience__points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.experience__point {
+  position: relative;
+  padding-left: 1.25rem;
+  color: var(--text);
+}
+
+.experience__point::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent);
+}
+
+@media (max-width: 768px) {
+  .experience__item {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

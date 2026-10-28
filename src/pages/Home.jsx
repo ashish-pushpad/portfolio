@@ -3,6 +3,7 @@ import About from '../components/About/About'
 import WhatIBuild from '../components/WhatIBuild/WhatIBuild'
 import Stack from '../components/Stack/Stack'
 import Projects from '../components/Projects/Projects'
+import Experience from '../components/Experience/Experience'
 import Mindset from '../components/Mindset/Mindset'
 import Journey from '../components/Journey/Journey'
 import LinkedIn from '../components/LinkedIn/LinkedIn'
@@ -17,6 +18,7 @@ export default function Home() {
       <WhatIBuild />
       <Stack />
       <Projects />
+      <Experience />
       <Mindset />
       <Journey />
       <LinkedIn />
