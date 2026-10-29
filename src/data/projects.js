@@ -17,7 +17,7 @@ export const projects = [
     ],
     github: "https://github.com/ashish-pushpad/order-fulfillment",
     live: "",
-    diagramType: "microservices",
+    diagramType: "orderFulfillment",
   },
   {
     number: "02",
@@ -28,7 +28,7 @@ export const projects = [
     technologies: ["React.js", "JavaScript", "Tailwind CSS", "Google Gemini", "REST APIs", "MongoDB"],
     github: "",
     live: "https://song-hunter.vercel.app/",
-    diagramType: "microservices",
+    diagramType: "songHunter",
   },
   {
     number: "03",
@@ -39,6 +39,6 @@ export const projects = [
     technologies: ["MongoDB", "Express.js", "React.js", "Node.js", "REST APIs", "Git"],
     github: "https://github.com/ashish-pushpad/tender_app",
     live: "",
-    diagramType: "microservices",
+    diagramType: "tenderBandhu",
   },
 ];

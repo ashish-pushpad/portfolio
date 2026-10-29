@@ -1,10 +1,14 @@
 import { useScrollAnimation } from '../../hooks/useScrollAnimation'
 import { projects } from '../../data/projects'
-import DiagramMicroservices from '../../assets/illustrations/DiagramMicroservices'
+import DiagramOrderFulfillment from '../../assets/illustrations/DiagramOrderFulfillment'
+import DiagramSongHunter from '../../assets/illustrations/DiagramSongHunter'
+import DiagramTenderBandhu from '../../assets/illustrations/DiagramTenderBandhu'
 import './Projects.css'
 
 const diagrams = {
-  microservices: DiagramMicroservices,
+  orderFulfillment: DiagramOrderFulfillment,
+  songHunter:       DiagramSongHunter,
+  tenderBandhu:     DiagramTenderBandhu,
 }
 
 export default function Projects() {
