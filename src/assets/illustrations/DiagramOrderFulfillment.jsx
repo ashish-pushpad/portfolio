@@ -1,172 +1,161 @@
 /**
  * Order Fulfillment Platform diagram
- * Go · Gin · gRPC · Protobuf · GraphQL · PostgreSQL · Redis · Docker
+ * Go · Gin · gRPC · Protocol Buffers · GraphQL · PostgreSQL · Redis · Docker
  *
- * Visual idea:
- *   Client (GraphQL / REST)
- *     ↓
- *   API Gateway (Gin)
- *     ↓  gRPC fan-out
- *   [Users] [Products] [Cart] [Orders] [Inventory]
- *     ↓           ↓
- *   Redis Cache   PostgreSQL
- *     (all wrapped inside a Docker border)
+ * Layout (top → bottom, well-spaced):
+ *   ┌─────────────── DOCKER ───────────────┐
+ *   │   CLIENT  (GraphQL · REST)           │
+ *   │       ↓  dashed line                 │
+ *   │   API GATEWAY  (Gin · auth · routing)│
+ *   │    ↓  "gRPC"  ↓                      │
+ *   │  USERS PRODUCTS CART ORDERS INVENTORY│
+ *   │       ↓            ↓                 │
+ *   │   REDIS        POSTGRESQL            │
+ *   │                                      │
+ *   │  Go · Gin · gRPC · Protobuf          │
+ *   └──────────────────────────────────────┘
  */
 export default function DiagramOrderFulfillment({ className = '' }) {
+  /* x-centres for the 5 services — spread evenly across 240px */
+  const svcX = [22, 62, 102, 148, 192]
+
   return (
     <svg
       className={className}
-      viewBox="0 0 220 310"
+      viewBox="0 0 240 380"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
       <defs>
         <style>{`
-          .dof-t { font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; fill: currentColor; }
-          .dof-sm { font-size: 6.5px; }
+          .dof-t   { font-family: 'IBM Plex Mono', monospace; font-size: 8.5px; fill: currentColor; }
+          .dof-sub { font-size: 6.5px; }
+          .dof-xs  { font-size: 6px; }
 
-          @keyframes dof-in {
-            from { opacity: 0; transform: translateY(-8px); }
+          @keyframes dofIn {
+            from { opacity: 0; transform: translateY(-7px); }
             to   { opacity: 1; transform: translateY(0); }
           }
-          .dof-a1 { animation: dof-in 0.45s ease 0.1s both; }
-          .dof-a2 { animation: dof-in 0.45s ease 0.35s both; }
-          .dof-a3 { animation: dof-in 0.45s ease 0.6s both; }
-          .dof-a4 { animation: dof-in 0.45s ease 0.85s both; }
-          .dof-a5 { animation: dof-in 0.45s ease 1.1s both; }
-          .dof-a6 { animation: dof-in 0.45s ease 1.35s both; }
-          .dof-a7 { animation: dof-in 0.45s ease 1.6s both; }
+          .dof-a1 { animation: dofIn 0.4s ease 0.10s both; }
+          .dof-a2 { animation: dofIn 0.4s ease 0.30s both; }
+          .dof-a3 { animation: dofIn 0.4s ease 0.55s both; }
+          .dof-a4 { animation: dofIn 0.4s ease 0.80s both; }
+          .dof-a5 { animation: dofIn 0.4s ease 1.05s both; }
 
-          @keyframes dof-flow { to { stroke-dashoffset: -18; } }
-          .dof-dash { stroke-dasharray: 4 4; animation: dof-flow 1.1s linear infinite; }
-
-          @keyframes dof-grpc {
-            0%,100% { stroke-dashoffset: 0; }
-            50%     { stroke-dashoffset: -18; }
-          }
-          .dof-grpc { stroke-dasharray: 3 5; animation: dof-grpc 1.4s ease-in-out infinite; }
+          @keyframes dofFlow { to { stroke-dashoffset: -16; } }
+          .dof-dash { stroke-dasharray: 4 4; animation: dofFlow 1s linear infinite; }
         `}</style>
       </defs>
 
-      {/* ── Docker outer border ── */}
-      <rect x="4" y="4" width="212" height="302" rx="6"
-        stroke="currentColor" strokeWidth="1" strokeDasharray="6 4" opacity="0.25" />
-      <text x="8" y="14" className="dof-t dof-sm" opacity="0.4">DOCKER</text>
+      {/* ── Docker border — drawn FIRST so it sits behind everything ── */}
+      <rect
+        x="6" y="6" width="228" height="340" rx="5"
+        stroke="currentColor" strokeWidth="1"
+        strokeDasharray="7 4" opacity="0.22"
+      />
+      {/* DOCKER label — top-left corner of border */}
+      <text x="12" y="18" className="dof-t dof-xs" opacity="0.4" letterSpacing="1">DOCKER</text>
 
-      {/* ── Client ── */}
+      {/* ── CLIENT ── y: 24–52 */}
       <g className="dof-a1">
-        <rect x="60" y="18" width="100" height="26" rx="3"
-          stroke="currentColor" strokeWidth="1.8" />
-        <text x="110" y="31" textAnchor="middle" className="dof-t" fontWeight="700">CLIENT</text>
-        <text x="110" y="41" textAnchor="middle" className="dof-t dof-sm" opacity="0.55">GraphQL · REST</text>
+        <rect x="70" y="24" width="100" height="28" rx="2"
+          stroke="currentColor" strokeWidth="1.6" />
+        <text x="120" y="37" textAnchor="middle" className="dof-t" fontWeight="700">CLIENT</text>
+        <text x="120" y="47" textAnchor="middle" className="dof-t dof-sub" opacity="0.5">GraphQL · REST</text>
       </g>
 
-      <line x1="110" y1="44" x2="110" y2="62"
-        stroke="currentColor" strokeWidth="1.5" className="dof-dash" />
-
-      {/* ── API Gateway (Gin) ── */}
-      <g className="dof-a2">
-        <rect x="35" y="62" width="150" height="30" rx="3"
-          stroke="currentColor" strokeWidth="1.8" />
-        <text x="110" y="77" textAnchor="middle" className="dof-t" fontWeight="700">API GATEWAY</text>
-        <text x="110" y="88" textAnchor="middle" className="dof-t dof-sm" opacity="0.55">Gin · auth · routing</text>
-      </g>
-
-      {/* gRPC label */}
-      <text x="114" y="106" className="dof-t dof-sm" opacity="0.45" fontStyle="italic">gRPC</text>
-
-      {/* Fan-out lines from gateway → 5 services */}
-      {/* vertical stem */}
-      <line x1="110" y1="92" x2="110" y2="104"
+      {/* stem down from CLIENT */}
+      <line x1="120" y1="52" x2="120" y2="72"
         stroke="currentColor" strokeWidth="1.4" className="dof-dash" />
-      {/* horizontal bar */}
-      <line x1="24" y1="104" x2="196" y2="104"
-        stroke="currentColor" strokeWidth="1.2" />
-      {/* vertical drops */}
-      {[24, 62, 110, 158, 196].map(x => (
-        <line key={x} x1={x} y1="104" x2={x} y2="118"
-          stroke="currentColor" strokeWidth="1.2" className="dof-grpc" />
+
+      {/* ── API GATEWAY ── y: 72–106 */}
+      <g className="dof-a2">
+        <rect x="24" y="72" width="192" height="34" rx="2"
+          stroke="currentColor" strokeWidth="1.7" />
+        <text x="120" y="87" textAnchor="middle" className="dof-t" fontWeight="700">API GATEWAY</text>
+        <text x="120" y="100" textAnchor="middle" className="dof-t dof-sub" opacity="0.5">Gin · auth · routing · rate-limit</text>
+      </g>
+
+      {/* gRPC badge — positioned clearly below gateway, above fan bar */}
+      <text x="121" y="118" textAnchor="middle" className="dof-t dof-sub"
+        opacity="0.45" fontStyle="italic">gRPC</text>
+
+      {/* stem down from gateway to fan bar */}
+      <line x1="120" y1="106" x2="120" y2="124"
+        stroke="currentColor" strokeWidth="1.3" className="dof-dash" />
+
+      {/* horizontal fan bar */}
+      <line x1={svcX[0]} y1="124" x2={svcX[4]} y2="124"
+        stroke="currentColor" strokeWidth="1.1" />
+
+      {/* vertical drops to each service */}
+      {svcX.map((x, i) => (
+        <line key={`drop-${x}`}
+          x1={x} y1="124" x2={x} y2="140"
+          stroke="currentColor" strokeWidth="1.1" className="dof-dash"
+          style={{ animationDelay: `${i * 0.1}s` }} />
       ))}
 
-      {/* ── 5 micro-services row ── */}
-      {/* Users */}
-      <g className="dof-a3">
-        <rect x="4" y="118" width="40" height="28" rx="2"
-          stroke="currentColor" strokeWidth="1.5" />
-        <text x="24" y="130" textAnchor="middle" className="dof-t" fontSize="7">USERS</text>
-        <text x="24" y="141" textAnchor="middle" className="dof-t dof-sm" opacity="0.5">Go</text>
-      </g>
+      {/* ── 5 MICROSERVICES ── y: 140–174 */}
+      {[
+        { cx: svcX[0], label: 'USERS'     },
+        { cx: svcX[1], label: 'PRODUCTS'  },
+        { cx: svcX[2], label: 'CART'      },
+        { cx: svcX[3], label: 'ORDERS'    },
+        { cx: svcX[4], label: 'INVENTORY' },
+      ].map(({ cx, label }, i) => (
+        <g key={label} className="dof-a3">
+          <rect x={cx - 8} y="140" width="40" height="32" rx="2"
+            stroke="currentColor" strokeWidth="1.4" />
+          <text x={cx + 12} y="155" textAnchor="middle" className="dof-t dof-xs" fontWeight="700">{label}</text>
+          <text x={cx + 12} y="167" textAnchor="middle" className="dof-t dof-xs" opacity="0.5">Go</text>
+        </g>
+      ))}
 
-      {/* Products */}
+      {/* lines down from each service */}
+      {svcX.map(x => (
+        <line key={`svc-down-${x}`}
+          x1={x + 1} y1="174" x2={x + 1} y2="196"
+          stroke="currentColor" strokeWidth="1.1" className="dof-dash" />
+      ))}
+
+      {/* converge — left 3 → Redis, right 2 → Postgres */}
+      <line x1={svcX[0] + 1} y1="196" x2={svcX[2] + 1} y2="196"
+        stroke="currentColor" strokeWidth="1" />
+      <line x1={svcX[1] + 1} y1="196" x2={svcX[1] + 1} y2="212"
+        stroke="currentColor" strokeWidth="1.2" className="dof-dash" />
+
+      <line x1={svcX[3] + 1} y1="196" x2={svcX[4] + 1} y2="196"
+        stroke="currentColor" strokeWidth="1" />
+      <line x1={svcX[3] + 1} y1="196" x2={svcX[3] + 1} y2="212"
+        stroke="currentColor" strokeWidth="1.2" className="dof-dash" />
+
+      {/* ── REDIS ── y: 212–246 */}
       <g className="dof-a4">
-        <rect x="48" y="118" width="40" height="28" rx="2"
-          stroke="currentColor" strokeWidth="1.5" />
-        <text x="68" y="130" textAnchor="middle" className="dof-t" fontSize="7">PRODUCTS</text>
-        <text x="68" y="141" textAnchor="middle" className="dof-t dof-sm" opacity="0.5">Go</text>
-      </g>
-
-      {/* Cart */}
-      <g className="dof-a4">
-        <rect x="90" y="118" width="40" height="28" rx="2"
-          stroke="currentColor" strokeWidth="1.5" />
-        <text x="110" y="130" textAnchor="middle" className="dof-t" fontSize="7">CART</text>
-        <text x="110" y="141" textAnchor="middle" className="dof-t dof-sm" opacity="0.5">Go</text>
-      </g>
-
-      {/* Orders */}
-      <g className="dof-a4">
-        <rect x="134" y="118" width="40" height="28" rx="2"
-          stroke="currentColor" strokeWidth="1.5" />
-        <text x="154" y="130" textAnchor="middle" className="dof-t" fontSize="7">ORDERS</text>
-        <text x="154" y="141" textAnchor="middle" className="dof-t dof-sm" opacity="0.5">Go</text>
-      </g>
-
-      {/* Inventory */}
-      <g className="dof-a4">
-        <rect x="178" y="118" width="38" height="28" rx="2"
-          stroke="currentColor" strokeWidth="1.5" />
-        <text x="197" y="130" textAnchor="middle" className="dof-t" fontSize="6.5">INVENTORY</text>
-        <text x="197" y="141" textAnchor="middle" className="dof-t dof-sm" opacity="0.5">Go</text>
-      </g>
-
-      {/* Lines from services to storage tier */}
-      {/* Left cluster → Redis */}
-      <line x1="24"  y1="146" x2="24"  y2="165" stroke="currentColor" strokeWidth="1.2" className="dof-dash" />
-      <line x1="68"  y1="146" x2="68"  y2="165" stroke="currentColor" strokeWidth="1.2" className="dof-dash" />
-      <line x1="110" y1="146" x2="110" y2="165" stroke="currentColor" strokeWidth="1.2" className="dof-dash" />
-      <line x1="154" y1="146" x2="154" y2="165" stroke="currentColor" strokeWidth="1.2" className="dof-dash" />
-      <line x1="197" y1="146" x2="197" y2="165" stroke="currentColor" strokeWidth="1.2" className="dof-dash" />
-
-      {/* Converge to two trunks */}
-      <line x1="24" y1="165" x2="67"  y2="165" stroke="currentColor" strokeWidth="1.1" />
-      <line x1="67" y1="165" x2="67"  y2="180" stroke="currentColor" strokeWidth="1.2" className="dof-dash" />
-      <line x1="110" y1="165" x2="197" y2="165" stroke="currentColor" strokeWidth="1.1" />
-      <line x1="154" y1="165" x2="154" y2="180" stroke="currentColor" strokeWidth="1.2" className="dof-dash" />
-
-      {/* ── Redis Cache ── */}
-      <g className="dof-a5">
-        <rect x="24" y="180" width="88" height="28" rx="3"
+        <rect x="14" y="212" width="100" height="34" rx="2"
           stroke="currentColor" strokeWidth="1.7" />
-        <text x="68" y="194" textAnchor="middle" className="dof-t" fontWeight="700">REDIS</text>
-        <text x="68" y="204" textAnchor="middle" className="dof-t dof-sm" opacity="0.55">cache · sessions</text>
+        <text x="64" y="227" textAnchor="middle" className="dof-t" fontWeight="700">REDIS</text>
+        <text x="64" y="239" textAnchor="middle" className="dof-t dof-sub" opacity="0.5">cache · sessions</text>
       </g>
 
-      {/* ── PostgreSQL ── */}
-      <g className="dof-a5">
-        <rect x="118" y="180" width="94" height="28" rx="3"
+      {/* ── POSTGRESQL ── y: 212–246 */}
+      <g className="dof-a4">
+        <rect x="126" y="212" width="100" height="34" rx="2"
           stroke="currentColor" strokeWidth="1.7" />
-        <text x="165" y="194" textAnchor="middle" className="dof-t" fontWeight="700">POSTGRESQL</text>
-        <text x="165" y="204" textAnchor="middle" className="dof-t dof-sm" opacity="0.55">persistent store</text>
+        <text x="176" y="227" textAnchor="middle" className="dof-t" fontWeight="700">POSTGRESQL</text>
+        <text x="176" y="239" textAnchor="middle" className="dof-t dof-sub" opacity="0.5">persistent store</text>
       </g>
 
-      {/* Protobuf label */}
-      <text x="8" y="275" className="dof-t dof-sm" opacity="0.35">Protobuf · Protocol Buffers</text>
+      {/* ── Protobuf note ── */}
+      <g className="dof-a5">
+        <text x="14" y="264" className="dof-t dof-sub" opacity="0.4">Protocol Buffers · Protobuf</text>
+      </g>
 
-      {/* ── bottom legend ── */}
-      <line x1="8" y1="260" x2="212" y2="260" stroke="currentColor" strokeWidth="0.7" opacity="0.2" />
-      <text x="8"   y="272" className="dof-t dof-sm" opacity="0.4">Go · Gin · gRPC</text>
-      <text x="8"   y="282" className="dof-t dof-sm" opacity="0.4">PostgreSQL · Redis · Docker</text>
+      {/* ── Tech stack legend ── bottom of Docker border */}
+      <line x1="14" y1="278" x2="226" y2="278"
+        stroke="currentColor" strokeWidth="0.6" opacity="0.15" />
+      <text x="14" y="310" className="dof-t dof-xs" opacity="0.35">Go · Gin · gRPC · GraphQL . PostgreSQL · Redis · Docker</text>
     </svg>
   )
 }

@@ -71,7 +71,7 @@
   border: 1px solid var(--border);
   border-radius: 3px;
   background: var(--bg-secondary);
-  min-height: 240px;
+  min-height: 340px;
   width: min(100%, 380px);
   margin-inline: auto;
   overflow: hidden;
