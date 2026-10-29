@@ -22,7 +22,7 @@
   --space-2xl: 10rem;
 
   /* Section vertical padding */
-  --section-py: clamp(5rem, 12vw, 10rem);
+  --section-py: clamp(5rem, 6vw, 10rem);
 
   /* Max content width */
   --max-w: 1200px;

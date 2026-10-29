@@ -27,7 +27,6 @@
   flex-direction: column;
   gap: 0;
   list-style: none;
-  border-top: 1px solid var(--border);
 }
 
 .journey__entry {
@@ -38,6 +37,10 @@
   border-bottom: 1px solid var(--border);
   align-items: start;
   position: relative;
+}
+
+.journey__entry:last-child {
+  border-bottom: none;
 }
 
 /* Connecting dot */

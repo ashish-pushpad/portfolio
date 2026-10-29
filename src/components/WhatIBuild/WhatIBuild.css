@@ -1,5 +1,6 @@
 .whatibuild__heading {
   margin-bottom: clamp(3rem, 6vw, 5rem);
+  padding-top: clamp(3rem, 6vw, 5rem);
 }
 
 .whatibuild__list {
@@ -15,10 +16,6 @@
   padding: clamp(2rem, 4vw, 3rem) 0;
   border-bottom: 1px solid var(--border);
   align-items: start;
-}
-
-.whatibuild__item:first-child {
-  border-top: 1px solid var(--border);
 }
 
 .whatibuild__number {

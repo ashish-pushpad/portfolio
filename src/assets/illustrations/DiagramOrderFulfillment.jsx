@@ -99,7 +99,7 @@ export default function DiagramOrderFulfillment({ className = '' }) {
       </g>
 
       {/* Products */}
-      <g className="dof-a3">
+      <g className="dof-a4">
         <rect x="48" y="118" width="40" height="28" rx="2"
           stroke="currentColor" strokeWidth="1.5" />
         <text x="68" y="130" textAnchor="middle" className="dof-t" fontSize="7">PRODUCTS</text>
