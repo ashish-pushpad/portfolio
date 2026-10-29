@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import './Navbar.css'
 
 const navLinks = [
-  { label: 'ABOUT',   href: '#about'   },
-  { label: 'WORK',    href: '#work'    },
-  { label: 'STACK',   href: '#stack'   },
-  { label: 'JOURNEY', href: '#journey' },
-  { label: 'LINKEDIN', href: 'https://in.linkedin.com/in/ashish-bagwan', external: true },
+  { label: 'ABOUT',      href: '#about'      },
+  { label: 'WORK',       href: '#work'       },
+  { label: 'EXPERIENCE', href: '#experience' },
+  { label: 'STACK',      href: '#stack'      },
+  { label: 'JOURNEY',    href: '#journey'    },
+  { label: 'LINKEDIN',   href: 'https://in.linkedin.com/in/ashish-bagwan', external: true },
 ]
 
 export default function Navbar({ theme, toggleTheme }) {
